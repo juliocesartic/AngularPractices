@@ -1,0 +1,91 @@
+
+        <div class="alert alert-danger" role="alert" [hidden]="!visible">{{errorAbout}}</div>
+
+
+<agm-map [latitude]="lat" [longitude]="lng">
+    <agm-marker *ngFor="let lugar of lugares" [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
+</agm-map>
+<!-- <div id="cuadrado" [@contenedorAnimable]= "state" (@contenedorAnimable.start)="animacionInicial($event)" (@contenedorAnimable.done)="animacionTerminal($event)">
+    
+</div> -->
+<a class="btn btn-default" (click)="animar()">Animar</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Lugares Cercanos</h2>
+            <a class="btn btn-primary" routerLink="/crear/new">Crear Nuevo negocio</a>
+
+            <ul class="list-group">
+                 
+                <ng-container *ngFor="let lugar of lugares">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                    
+                                    <li class="list-group-item">
+                                        <h3><b>{{lugar.nombre }}</b>  <p [hidden]="lugar.plan == 'Pagado'? false : true"><span class="glyphicon glyphicon-star" ></span></p> </h3>
+                                        <br>
+                                        <p [innerHtml]="lugar.descripcion | linkifystr"></p>
+                                        <br>
+                                        <small>Creado: {{lugar.id | date : 'shortTime' | uppercase}}</small>
+                                        <br>
+                                        {{ '12345.29347837' | number : '1.2-2' }}
+                                        <!-- <a routerLink="/detalle/{{lugar.id}}" [queryParams]="{action:'view', referer:'google'}">
+                                            <i class="glyphicon glyphicon-eye-open" aria-hidden="true">Ver</i>
+                                        </a>
+                                        <a routerLink="/detalle/{{lugar.id}}" [queryParams]="{action:'view', referer:'google'}">
+                                            <i class="glyphicon glyphicon-edit" aria-hidden="true">Editar</i>
+                                        </a> -->
+                                    </li>
+
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <li class="list-group-item">
+                                        <a routerLink="/detalle/{{lugar.id}}" [queryParams]="{action:'view', referer:'google'}">
+                                            <i class="glyphicon glyphicon-eye-open" aria-hidden="true">Ver</i>
+                                        </a>
+                                </li>
+                            </div>
+
+                            <div class="col-md-4">
+                                <li class="list-group-item">
+                                        <a routerLink="/crear/{{lugar.id}}">
+                                            <i class="glyphicon glyphicon-edit" aria-hidden="true">Editar</i>
+                                        </a>
+                                </li>
+                            </div>
+
+
+                        </div> 
+                        
+                    
+                </ng-container>
+                <br>
+            </ul>
+        </div>
+        <div class="col-md-4" [@contenedorAnimable]= "state">
+            <h2>Lugares Destacados</h2>
+            
+            <ul class="list-group">
+                
+               <ng-container *ngFor="let lugar of lugares">
+
+                       <div class="row">
+                           <div class="col-md-12">
+                                   
+                                   <div class="bg-warning padding" *ngIf="lugar.plan == 'Pagado'">
+                                        <a routerLink="/crear/{{lugar.id}}"><h3><b>{{lugar.nombre }}</b></h3></a>
+                                       <p [innerHtml]="lugar.descripcion | linkifystr"></p>
+                                    </div>
+
+                           </div>
+                       </div> 
+                       
+                   
+               </ng-container>
+               <br>
+           </ul>
+        </div>
+    </div>
+</div>
